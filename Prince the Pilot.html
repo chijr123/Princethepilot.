@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!-- saved from url=(0119)http://localhost:63342/my%20project/Prince%20the%20Pilot.html?_ijt=nlkn8b37u8d4qbjg423pvg8fif&_ij_reload=RELOAD_ON_SAVE -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All About Pilots</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f8ff url('plane_background.jpg') no-repeat center fixed;
+            background-size: cover;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        p {
+            color: #555;
+            line-height: 1.6;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            color: #222;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prince the Pilot</h1>
+
+        <div class="section">
+            <h2>Introduction to Pilots</h2>
+            <p>Pilots are highly skilled professionals who operate aircraft to transport passengers, cargo, or for various other purposes such as aerial photography, firefighting, and military missions.</p>
+            <p>They undergo rigorous training and must possess excellent flying skills, knowledge of aircraft systems, navigation, and aviation regulations.</p>
+        </div>
+
+        <div class="section">
+            <h2>Famous Pilots</h2>
+            <p>There have been numerous famous pilots throughout history, including:</p>
+            <ul>
+                <li>Amelia Earhart</li>
+                <li>Charles Lindbergh</li>
+                <li>Chuck Yeager</li>
+                <li>Neil Armstrong</li>
+                <li>Yuri Gagarin</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Books About Pilots</h2>
+            <p>Several books have been written about pilots and aviation. Some popular ones include:</p>
+            <ul>
+                <li>"The Wright Brothers" by David McCullough</li>
+                <li>"Fate Is the Hunter" by Ernest K. Gann</li>
+                <li>"Sully: My Search for What Really Matters" by Chesley B. Sullenberger</li>
+                <li>"Flyboys: A True Story of Courage" by James Bradley</li>
+                <li>"The Spirit of St. Louis" by Charles A. Lindbergh</li>
+            </ul>
+        </div>
+    </div>
+
+<script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script></body></html>
